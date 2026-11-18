@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NusaCraft — Toko Gaya Hidup & Minimalis</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom scrollbar untuk keranjang */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- 1. HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Toko -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-sm group-hover:bg-indigo-700 transition">
+                        N
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Nusa<span class="text-indigo-600">Craft</span></span>
+                </a>
+
+                <!-- Menu Navigasi (Desktop) -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#beranda" class="hover:text-indigo-600 transition">Beranda</a>
+                    <a href="#katalog" class="hover:text-indigo-600 transition">Katalog Produk</a>
+                    <a href="#tentang" class="hover:text-indigo-600 transition">Tentang Kami</a>
+                </nav>
+
+                <!-- Tombol Keranjang Belanja -->
+                <div class="flex items-center">
+                    <button onclick="toggleCart()" class="relative p-2.5 text-slate-700 hover:text-indigo-600 hover:bg-slate-100 rounded-full transition focus:outline-none" aria-label="Buka Keranjang">
+                        <!-- Ikon Keranjang (SVG) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <!-- Badge Jumlah Produk -->
+                        <span id="cart-badge" class="absolute top-0.5 right-0.5 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform bg-indigo-600 rounded-full transition-transform duration-200">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        
+        <!-- 2. HERO SECTION -->
+        <section id="beranda" class="relative bg-slate-900 overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Banner Toko" class="w-full h-full object-cover opacity-35">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+            </div>
+
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+                <div class="max-w-2xl">
+                    <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-semibold tracking-wider uppercase mb-4">
+                        Koleksi Terbaru 2026
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
+                        Tingkatkan Gaya Hidup dengan Desain Minimalis.
+                    </h1>
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                        Temukan kurasi perlengkapan harian berkualitas tinggi yang memadukan estetika modern dan fungsi maksimal untuk menemani aktivitas Anda.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#katalog" class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-500 transition shadow-lg shadow-indigo-600/30">
+                            Belanja Sekarang
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. KATALOG PRODUK -->
+        <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Katalog Pilihan</h2>
+                    <p class="mt-2 text-slate-600">Pilih produk favorit Anda dan tambahkan langsung ke keranjang.</p>
+                </div>
+            </div>
+
+            <!-- Grid Produk (Di-render otomatis oleh JavaScript) -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Kartu produk akan disuntikkan ke sini -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. FOOTER -->
+    <footer id="tentang" class="bg-white border-t border-slate-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">N</div>
+                        <span class="font-bold text-lg text-slate-900">NusaCraft</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        Menyediakan produk gaya hidup kurasi terbaik dengan pengiriman cepat dan garansi kualitas ke seluruh Indonesia.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4">Tautan Cepat</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><a href="#beranda" class="hover:text-indigo-600 transition">Beranda</a></li>
+                        <li><a href="#katalog" class="hover:text-indigo-600 transition">Katalog Produk</a></li>
+                        <li><button onclick="toggleCart()" class="hover:text-indigo-600 transition">Lihat Keranjang</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4">Hubungi Kami</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li>Email: halo@nusacraft.id</li>
+                        <li>WhatsApp: +62 812-3456-7890</li>
+                        <li>Alamat: Jl. Sudirman No. 45, Jakarta</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400">
+                <p>&copy; 2026 NusaCraft Store. Hak Cipta Dilindungi Undang-Undang.</p>
+                <p class="mt-2 sm:mt-0">Dibuat dengan HTML, Tailwind CSS & Vanilla JS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 4. DRAWER / MODAL KERANJANG BELANJA -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!-- Backdrop Gelap -->
+        <div onclick="toggleCart()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+                
+                <!-- Header Keranjang -->
+                <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-slate-900" id="slide-over-title">Keranjang Belanja</h2>
+                    <button onclick="toggleCart()" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Daftar Item di Keranjang -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Item keranjang dirender via JS -->
+                </div>
+
+                <!-- Footer Keranjang (Total & Checkout) -->
+                <div class="border-t border-slate-200 p-6 bg-slate-50">
+                    <div class="flex justify-between text-base font-semibold text-slate-900 mb-4">
+                        <span>Total Harga</span>
+                        <span id="cart-total-price" class="text-indigo-600 text-lg">Rp 0</span>
+                    </div>
+                    <button onclick="checkout()" id="checkout-btn" disabled class="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+                        <span>Checkout Sekarang</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFIKASI TOAST -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 text-sm font-medium">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+            <span id="toast-message">Produk ditambahkan ke keranjang</span>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Data Produk Contoh (Menggunakan gambar berkualitas tinggi dari Unsplash)
+        const products = [
+            {
+                id: 1,
+                name: "Jam Tangan Minimalis Chrono",
+                category: "Aksesoris",
+                price: 450000,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Headphone Wireless Studio",
+                category: "Audio",
+                price: 890000,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Ransel Kanvas Harian Urban",
+                category: "Tas",
+                price: 325000,
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Tumbler Kopi Vacuum Matte",
+                category: "Gaya Hidup",
+                price: 175000,
+                image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Kacamata Hitam Polarized",
+                category: "Aksesoris",
+                price: 240000,
+                image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Sneakers Putih Klasik",
+                category: "Alas Kaki",
+                price: 550000,
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Kamera Analog Retro 35mm",
+                category: "Elektronik",
+                price: 1250000,
+                image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 8,
+                name: "Lampu Meja Belajar Nordic",
+                category: "Dekorasi",
+                price: 290000,
+                image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // State Keranjang Belanja (Menggunakan localStorage agar data tidak hilang saat di-refresh)
+        let cart = JSON.parse(localStorage.getItem('nusacraft_cart')) || [];
+
+        // Helper Format Rupiah
+        const formatRupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+        };
+
+        // Render Katalog Produk ke HTML
+        const renderProducts = () => {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = products.map(product => `
+                <div class="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                    <div class="relative aspect-square overflow-hidden bg-slate-100">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700">
+                            ${product.category}
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg leading-snug mb-1">${product.name}</h3>
+                            <p class="text-indigo-600 font-bold text-base mb-4">${formatRupiah(product.price)}</p>
+                        </div>
+                        <button onclick="addToCart(${product.id})" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-indigo-600 text-white text-sm font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        // Fungsi Tambah ke Keranjang
+        const addToCart = (productId) => {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveAndUpdateCart();
+            showToast(`"${product.name}" ditambahkan!`);
+        };
+
+        // Fungsi Ubah Kuantitas (+ / -)
+        const updateQuantity = (productId, delta) => {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += delta;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveAndUpdateCart();
+            }
+        };
+
+        // Fungsi Hapus Item
+        const removeFromCart = (productId) => {
+            cart = cart.filter(item => item.id !== productId);
+            saveAndUpdateCart();
+        };
+
+        // Simpan ke localStorage & Update Tampilan UI Keranjang
+        const saveAndUpdateCart = () => {
+            localStorage.setItem('nusacraft_cart', JSON.stringify(cart));
+            renderCart();
+        };
+
+        // Render Isi Keranjang, Badge, dan Total Harga
+        const renderCart = () => {
+            const cartContainer = document.getElementById('cart-items-container');
+            const cartBadge = document.getElementById('cart-badge');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // Hitung total kuantitas dan total harga
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Update Badge
+            cartBadge.textContent = totalItems;
+            cartBadge.classList.add('scale-125');
+            setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
+
+            // Update Total Harga
+            cartTotalPrice.textContent = formatRupiah(totalPrice);
+
+            // Render Daftar Produk di Drawer Keranjang
+            if (cart.length === 0) {
+                checkoutBtn.disabled = true;
+                cartContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <p class="text-slate-900 font-semibold">Keranjang masih kosong</p>
+                        <p class="text-sm text-slate-500 mt-1">Yuk, mulai pilih produk favoritmu!</p>
+                    </div>
+                `;
+            } else {
+                checkoutBtn.disabled = false;
+                cartContainer.innerHTML = cart.map(item => `
+                    <div class="flex gap-4 bg-white p-3 rounded-xl border border-slate-200/80">
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg bg-slate-100">
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start gap-2">
+                                    <h4 class="font-semibold text-sm text-slate-900 line-clamp-1">${item.name}</h4>
+                                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-rose-500 transition" title="Hapus">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="text-xs font-semibold text-indigo-600 mt-0.5">${formatRupiah(item.price)}</p>
+                            </div>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="inline-flex items-center border border-slate-200 rounded-lg">
+                                    <button onclick="updateQuantity(${item.id}, -1)" class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 rounded-l-lg text-xs font-bold">-</button>
+                                    <span class="px-2.5 py-1 text-xs font-semibold text-slate-900">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.id}, 1)" class="px-2.5 py-1 text-slate-600 hover:bg-slate-100 rounded-r-lg text-xs font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        };
+
+        // Buka / Tutup Drawer Keranjang
+        const toggleCart = () => {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        };
+
+        // Simulasi Checkout
+        const checkout = () => {
+            const total = document.getElementById('cart-total-price').textContent;
+            alert(`Terima kasih telah berbelanja di NusaCraft!\n\nTotal Pembayaran: ${total}\nPesanan Anda sedang diproses.`);
+            cart = [];
+            saveAndUpdateCart();
+            toggleCart();
+        };
+
+        // Tampilkan Notifikasi Toast
+        let toastTimeout;
+        const showToast = (message) => {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        };
+
+        // Inisialisasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderCart();
+        });
+    </script>
+</body>
+</html>
